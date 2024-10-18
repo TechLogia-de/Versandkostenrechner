@@ -30,8 +30,6 @@ Für die Implementierung eines Versandkostenrechners verwenden wir eine Kombinat
 ### HTML-Struktur
 
 Die HTML-Struktur stellt sicher, dass der Benutzer interaktiv seine Eingaben machen kann. Wir verwenden Dropdown-Menüs für das Zielland und die Versandart sowie ein Eingabefeld für die Anzahl der Artikel.
-
-```html
 <div class="container">
     <h1>Versandkostenrechner</h1>
     <label for="country">Wähle dein Land:</label>
@@ -54,6 +52,7 @@ Die HTML-Struktur stellt sicher, dass der Benutzer interaktiv seine Eingaben mac
 
     <div class="result" id="result"></div>
 </div>
+
 
 CSS für ein modernes Design
 
