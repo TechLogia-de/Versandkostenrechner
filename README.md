@@ -58,8 +58,6 @@ CSS für ein modernes Design
 
 Damit der Versandkostenrechner nicht nur funktional, sondern auch optisch ansprechend ist, gestalten wir ihn mit modernem CSS. Das Design sorgt dafür, dass der Rechner auf allen Geräten gut aussieht und leicht zu bedienen ist.
 
-css
-
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
