@@ -59,3 +59,62 @@ html```
 CSS für ein modernes Design
 
 Damit der Versandkostenrechner nicht nur funktional, sondern auch optisch ansprechend ist, gestalten wir ihn mit modernem CSS. Das Design sorgt dafür, dass der Rechner auf allen Geräten gut aussieht und leicht zu bedienen ist.
+
+```CSS
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+}
+label {
+    display: block;
+    margin: 15px 0 5px;
+    color: #555;
+    font-weight: bold;
+}
+select, input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+    display: none;
+}
