@@ -119,8 +119,6 @@ JavaScript für die Berechnung der Versandkosten
 
 Der Kern des Rechners ist die JavaScript-Logik, die basierend auf der Anzahl der Artikel, dem ausgewählten Land und der Versandart die entsprechenden Versandkosten berechnet.
 
-javascript
-
 const shippingRates = {
     de: {
         standard: [
@@ -183,6 +181,7 @@ function calculateShipping() {
     resultElement.innerText = `Die Versandkosten betragen: ${rate.cost} €.`;
     resultElement.style.display = 'block';
 }
+
 
 4. Integration in Shopify und andere Plattformen
 
