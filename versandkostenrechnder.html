@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versandkostenrechner</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 18px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Versandkostenrechner</h1>
+        <label for="country">Wähle dein Land:</label>
+        <select id="country">
+            <option value="de">Deutschland</option>
+            <option value="at">Österreich</option>
+            <option value="ch">Schweiz</option>
+            <!-- Weitere Länder hinzufügen -->
+        </select>
+
+        <label for="itemCount">Anzahl der Artikel:</label>
+        <input type="number" id="itemCount" min="1" placeholder="Anzahl der Artikel eingeben">
+
+        <label for="shippingType">Versandart:</label>
+        <select id="shippingType">
+            <option value="standard">Standard</option>
+            <option value="express">Express</option>
+        </select>
+
+        <button onclick="calculateShipping()">Versandkosten berechnen</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const shippingRates = {
+            de: {
+                standard: [
+                    { limit: 10, cost: 4.99 },
+                    { limit: 25, cost: 5.99 },
+                    { limit: 50, cost: 7.99 },
+                    { limit: Infinity, cost: 9.99 }
+                ],
+                express: [
+                    { limit: 10, cost: 19.99 },
+                    { limit: 25, cost: 24.99 },
+                    { limit: 50, cost: 49.99 },
+                    { limit: Infinity, cost: 69.99 }
+                ]
+            },
+            at: {
+                standard: [
+                    { limit: 10, cost: 10.99 },
+                    { limit: 25, cost: 16.99 },
+                    { limit: 50, cost: 24.99 },
+                    { limit: Infinity, cost: 99.99 }
+                ],
+                express: [
+                    { limit: 10, cost: 29.99 },
+                    { limit: 25, cost: 39.99 },
+                    { limit: 50, cost: 59.99 },
+                    { limit: Infinity, cost: 119.99 }
+                ]
+            },
+            ch: {
+                standard: [
+                    { limit: 10, cost: 24.99 },
+                    { limit: 25, cost: 34.99 },
+                    { limit: 50, cost: 49.99 },
+                    { limit: Infinity, cost: 169.99 }
+                ],
+                express: [
+                    { limit: 10, cost: 49.99 },
+                    { limit: 25, cost: 69.99 },
+                    { limit: 50, cost: 119.99 },
+                    { limit: Infinity, cost: 199.99 }
+                ]
+            }
+        };
+
+        function calculateShipping() {
+            const country = document.getElementById("country").value;
+            const itemCount = parseInt(document.getElementById("itemCount").value);
+            const shippingType = document.getElementById("shippingType").value;
+            const resultElement = document.getElementById("result");
+
+            if (!itemCount || itemCount <= 0) {
+                resultElement.innerText = "Bitte eine gültige Anzahl an Artikeln eingeben.";
+                resultElement.style.display = 'block';
+                return;
+            }
+
+            const rates = shippingRates[country][shippingType];
+            const rate = rates.find(r => itemCount <= r.limit);
+            resultElement.innerText = `Die Versandkosten betragen: ${rate.cost} €.`;
+            resultElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
