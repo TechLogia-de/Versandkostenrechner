@@ -54,13 +54,12 @@ Die HTML-Struktur stellt sicher, dass der Benutzer interaktiv seine Eingaben mac
 
     <div class="result" id="result"></div>
 </div>
-html```
 
 CSS für ein modernes Design
 
 Damit der Versandkostenrechner nicht nur funktional, sondern auch optisch ansprechend ist, gestalten wir ihn mit modernem CSS. Das Design sorgt dafür, dass der Rechner auf allen Geräten gut aussieht und leicht zu bedienen ist.
 
-```CSS
+css
 
 body {
     font-family: 'Arial', sans-serif;
@@ -118,3 +117,81 @@ button:hover {
     text-align: center;
     display: none;
 }
+
+JavaScript für die Berechnung der Versandkosten
+
+Der Kern des Rechners ist die JavaScript-Logik, die basierend auf der Anzahl der Artikel, dem ausgewählten Land und der Versandart die entsprechenden Versandkosten berechnet.
+
+javascript
+
+const shippingRates = {
+    de: {
+        standard: [
+            { limit: 10, cost: 4.99 },
+            { limit: 25, cost: 5.99 },
+            { limit: 50, cost: 7.99 },
+            { limit: Infinity, cost: 9.99 }
+        ],
+        express: [
+            { limit: 10, cost: 19.99 },
+            { limit: 25, cost: 24.99 },
+            { limit: 50, cost: 49.99 },
+            { limit: Infinity, cost: 69.99 }
+        ]
+    },
+    at: {
+        standard: [
+            { limit: 10, cost: 10.99 },
+            { limit: 25, cost: 16.99 },
+            { limit: 50, cost: 24.99 },
+            { limit: Infinity, cost: 99.99 }
+        ],
+        express: [
+            { limit: 10, cost: 29.99 },
+            { limit: 25, cost: 39.99 },
+            { limit: 50, cost: 59.99 },
+            { limit: Infinity, cost: 119.99 }
+        ]
+    },
+    ch: {
+        standard: [
+            { limit: 10, cost: 24.99 },
+            { limit: 25, cost: 34.99 },
+            { limit: 50, cost: 49.99 },
+            { limit: Infinity, cost: 169.99 }
+        ],
+        express: [
+            { limit: 10, cost: 49.99 },
+            { limit: 25, cost: 69.99 },
+            { limit: 50, cost: 119.99 },
+            { limit: Infinity, cost: 199.99 }
+        ]
+    }
+};
+
+function calculateShipping() {
+    const country = document.getElementById("country").value;
+    const itemCount = parseInt(document.getElementById("itemCount").value);
+    const shippingType = document.getElementById("shippingType").value;
+    const resultElement = document.getElementById("result");
+
+    if (!itemCount || itemCount <= 0) {
+        resultElement.innerText = "Bitte eine gültige Anzahl an Artikeln eingeben.";
+        resultElement.style.display = 'block';
+        return;
+    }
+
+    const rates = shippingRates[country][shippingType];
+    const rate = rates.find(r => itemCount <= r.limit);
+    resultElement.innerText = `Die Versandkosten betragen: ${rate.cost} €.`;
+    resultElement.style.display = 'block';
+}
+
+4. Integration in Shopify und andere Plattformen
+
+Wenn du diesen Versandkostenrechner in Shopify oder anderen E-Commerce-Plattformen integrieren möchtest, kannst du ihn als benutzerdefiniertes Skript oder direkt in die Seite einbinden. Da der Rechner mit einfachen HTML, CSS und JavaScript erstellt wurde, ist er kompatibel mit den meisten Plattformen, die das Einbinden von benutzerdefinierten Codes ermöglichen.
+
+In Shopify könntest du ihn beispielsweise in den Theme-Editor unter Abschnitte oder Snippets hinzufügen. Für andere Content-Management-Systeme wie WordPress kannst du ihn als benutzerdefiniertes HTML/JavaScript-Widget hinzufügen.
+5. Fazit
+
+Ein gut implementierter Versandkostenrechner sorgt für Transparenz, reduziert Unsicherheiten und fördert den Kaufabschluss. Mit den richtigen Tools und einer benutzerfreundlichen Oberfläche können Online-Shops die Versandkostenberechnung nahtlos in den Kaufprozess integrieren. Der in diesem Beitrag vorgestellte Rechner lässt sich leicht anpassen und bietet durch seine Einfachheit und Effizienz ein optimales Nutzererlebnis.
