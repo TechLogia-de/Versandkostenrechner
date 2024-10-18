@@ -1,3 +1,4 @@
+https://cloud.techlogia.de/s/tqo9w3DEnKWAY4B
 # Versandkostenrechner für Online-Shops: Ein einfacher Leitfaden zur Berechnung von Versandkosten basierend auf der Artikelanzahl und dem Zielland
 
 Versandkosten sind ein entscheidender Faktor im E-Commerce, der oft darüber entscheidet, ob ein Kunde einen Kauf abschließt oder den Warenkorb aufgibt. Ein gut implementierter Versandkostenrechner, der den Versand basierend auf der Anzahl der Artikel und dem Zielland berechnet, kann das Einkaufserlebnis verbessern und den Umsatz steigern.
