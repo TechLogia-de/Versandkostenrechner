@@ -57,6 +57,7 @@ Die HTML-Struktur stellt sicher, dass der Benutzer interaktiv seine Eingaben mac
 CSS für ein modernes Design
 
 Damit der Versandkostenrechner nicht nur funktional, sondern auch optisch ansprechend ist, gestalten wir ihn mit modernem CSS. Das Design sorgt dafür, dass der Rechner auf allen Geräten gut aussieht und leicht zu bedienen ist.
+
  ``` 
 body {
     font-family: 'Arial', sans-serif;
@@ -114,11 +115,12 @@ button:hover {
     text-align: center;
     display: none;
 }
-
+ ``` 
 JavaScript für die Berechnung der Versandkosten
 
 Der Kern des Rechners ist die JavaScript-Logik, die basierend auf der Anzahl der Artikel, dem ausgewählten Land und der Versandart die entsprechenden Versandkosten berechnet.
- ``` 
+
+  ``` 
 const shippingRates = {
     de: {
         standard: [
@@ -181,7 +183,7 @@ function calculateShipping() {
     resultElement.innerText = `Die Versandkosten betragen: ${rate.cost} €.`;
     resultElement.style.display = 'block';
 }
-
+ ```
 
 4. Integration in Shopify und andere Plattformen
 
