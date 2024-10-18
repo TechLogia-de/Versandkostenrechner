@@ -54,7 +54,7 @@ Die HTML-Struktur stellt sicher, dass der Benutzer interaktiv seine Eingaben mac
 
     <div class="result" id="result"></div>
 </div>
-```html
+html```
 
 CSS für ein modernes Design
 
