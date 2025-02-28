@@ -3,206 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versandkostenrechner - Optimiert</title>
+    <title>VIP Versandkalkulator - GiftsbyAl.de</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --main-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --hover-gradient: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
         * {
             box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
+            background: #f8f9ff;
+            background-image: radial-gradient(circle at 1px 1px, #e0e7ff 1px, transparent 0);
+            background-size: 40px 40px;
         }
-        .shipping-calculator {
-            max-width: 400px;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 15px;
-            background-color: #fff;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        .shipping-calculator:hover {
-            transform: scale(1.05);
-        }
-        h1 {
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 25px;
-            color: #333;
-        }
-        label {
-            font-weight: bold;
-            margin: 10px 0 5px;
-            display: block;
-        }
-        select, input, button {
+
+        .shipping-vip {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
             width: 100%;
-            padding: 12px;
-            margin: 5px 0 15px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            max-width: 480px;
+            margin: 1rem;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        input:hover, select:hover, button:hover {
-            border-color: #007bff;
+
+        .shipping-vip:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
         }
-        button {
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            padding: 20px;
+
+        .calculator-header {
             text-align: center;
-            background-color: #007bff;
-            border: 2px solid #0056b3;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 22px;
-            color: #fff;
-            display: none;
+            margin-bottom: 2rem;
             position: relative;
-            animation: popUp 0.8s ease forwards;
         }
-        @keyframes popUp {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.9;
-            }
-            100% {
-                transform: scale(1);
+
+        .calculator-header h1 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-icon {
+            color: #667eea;
+            width: 20px;
+            text-align: center;
+        }
+
+        .styled-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .styled-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .glow-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-button:hover {
+            background: var(--hover-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-card {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--main-gradient);
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            animation: slideUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .result-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes slideUp {
+            to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
-        .result:before {
-            content: "\f058";
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #007bff;
-            border-radius: 50%;
-            padding: 10px;
-            font-size: 24px;
-            color: #fff;
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .price-display {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .delivery-time {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            .shipping-vip {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .calculator-header h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="shipping-calculator">
-        <h1>Versandkostenrechner <i class="fas fa-shipping-fast"></i></h1>
-        
-        <label for="country">Wähle dein Land:</label>
-        <select id="country">
-            <option value="de">Deutschland</option>
-            <option value="at">Österreich</option>
-            <option value="ch">Schweiz</option>
-            <!-- Weitere Länder hinzufügen -->
-        </select>
+    <div class="shipping-vip">
+        <div class="calculator-header">
+            <h1><i class="fas fa-rocket"></i> VIP Versandkalkulator</h1>
+            <p>Berechnen Sie Ihre Express-Optionen</p>
+        </div>
 
-        <label for="itemCount">Anzahl der Artikel:</label>
-        <input type="number" id="itemCount" min="1" placeholder="Anzahl der Artikel eingeben">
+        <div class="input-group">
+            <label for="country">
+                <i class="fas fa-globe-europe input-icon"></i>Lieferland
+            </label>
+            <select id="country" class="styled-input">
+                <option value="de">🇩🇪 Deutschland</option>
+                <option value="at">🇦🇹 Österreich</option>
+                <option value="ch">🇨🇭 Schweiz</option>
+            </select>
+        </div>
 
-        <label for="shippingType">Versandart:</label>
-        <select id="shippingType">
-            <option value="standard">Standard</option>
-            <option value="express">Express</option>
-        </select>
+        <div class="input-group">
+            <label for="itemCount">
+                <i class="fas fa-gift input-icon"></i>Anzahl der Artikel
+            </label>
+            <input type="number" id="itemCount" class="styled-input" min="1" placeholder="Wie viele Artikel?">
+        </div>
 
-        <button onclick="calculateShipping()">Versandkosten berechnen</button>
+        <div class="input-group">
+            <label for="shippingType">
+                <i class="fas fa-shipping-fast input-icon"></i>Versandart
+            </label>
+            <select id="shippingType" class="styled-input">
+                <option value="standard">Standard (3-5 Werktage)</option>
+                <option value="express">Express (1-2 Werktage)</option>
+            </select>
+        </div>
 
-        <div class="result" id="result"></div>
+        <button class="glow-button" onclick="calculateShipping()">
+            JETZT BERECHNEN <i class="fas fa-calculator"></i>
+        </button>
+
+        <div class="result-card" id="result">
+            <i class="fas fa-check-circle result-icon"></i>
+            <div class="price-display" id="price">€ 0.00</div>
+            <div class="delivery-time" id="delivery"></div>
+        </div>
     </div>
 
     <script>
-        const shippingRates = {
+        const shippingData = {
             de: {
-                standard: [
-                    { limit: 10, cost: 4.99 },
-                    { limit: 25, cost: 5.99 },
-                    { limit: 50, cost: 7.99 },
-                    { limit: Infinity, cost: 9.99 }
-                ],
-                express: [
-                    { limit: 10, cost: 19.99 },
-                    { limit: 25, cost: 24.99 },
-                    { limit: 50, cost: 49.99 },
-                    { limit: Infinity, cost: 69.99 }
-                ]
+                standard: { cost: [4.99, 5.99, 7.99, 9.99], days: '3-5 Werktage' },
+                express: { cost: [19.99, 24.99, 49.99, 69.99], days: '1-2 Werktage' }
             },
             at: {
-                standard: [
-                    { limit: 10, cost: 10.99 },
-                    { limit: 25, cost: 16.99 },
-                    { limit: 50, cost: 24.99 },
-                    { limit: Infinity, cost: 99.99 }
-                ],
-                express: [
-                    { limit: 10, cost: 29.99 },
-                    { limit: 25, cost: 39.99 },
-                    { limit: 50, cost: 59.99 },
-                    { limit: Infinity, cost: 119.99 }
-                ]
+                standard: { cost: [10.99, 16.99, 24.99, 99.99], days: '4-6 Werktage' },
+                express: { cost: [29.99, 39.99, 59.99, 119.99], days: '2-3 Werktage' }
             },
             ch: {
-                standard: [
-                    { limit: 10, cost: 24.99 },
-                    { limit: 25, cost: 34.99 },
-                    { limit: 50, cost: 49.99 },
-                    { limit: Infinity, cost: 169.99 }
-                ],
-                express: [
-                    { limit: 10, cost: 49.99 },
-                    { limit: 25, cost: 69.99 },
-                    { limit: 50, cost: 119.99 },
-                    { limit: Infinity, cost: 199.99 }
-                ]
+                standard: { cost: [24.99, 34.99, 49.99, 169.99], days: '5-7 Werktage' },
+                express: { cost: [49.99, 69.99, 119.99, 199.99], days: '3-4 Werktage' }
             }
         };
 
         function calculateShipping() {
-            const country = document.getElementById("country").value;
-            const itemCount = parseInt(document.getElementById("itemCount").value);
-            const shippingType = document.getElementById("shippingType").value;
-            const resultElement = document.getElementById("result");
+            const country = document.getElementById('country').value;
+            const itemCount = parseInt(document.getElementById('itemCount').value) || 0;
+            const shippingType = document.getElementById('shippingType').value;
+            const resultElement = document.getElementById('result');
+            const priceElement = document.getElementById('price');
+            const deliveryElement = document.getElementById('delivery');
 
-            console.log("Country selected:", country);
-            console.log("Item count entered:", itemCount);
-            console.log("Shipping type selected:", shippingType);
+            const tiers = itemCount <= 10 ? 0 : 
+                        itemCount <= 25 ? 1 : 
+                        itemCount <= 50 ? 2 : 3;
 
-            if (!itemCount || itemCount <= 0) {
-                console.error("Invalid item count entered:", itemCount);
-                resultElement.innerText = "Bitte eine gültige Anzahl an Artikeln eingeben.";
-                resultElement.style.display = 'block';
-                return;
-            }
+            const cost = shippingData[country][shippingType].cost[tiers];
+            const deliveryTime = shippingData[country][shippingType].days;
 
-            const rates = shippingRates[country][shippingType];
-            console.log("Applicable rates:", rates);
-            const rate = rates.find(r => itemCount <= r.limit);
-            console.log("Calculated rate:", rate);
-
-            resultElement.innerText = `Die Versandkosten betragen: ${rate.cost.toFixed(2)} €.`;
+            // Animation handling
             resultElement.style.display = 'block';
+            resultElement.style.animation = 'none';
+            void resultElement.offsetWidth; // Trigger reflow
+            resultElement.style.animation = 'slideUp 0.5s ease forwards';
+
+            priceElement.innerHTML = `€ ${cost.toFixed(2)}`;
+            deliveryElement.textContent = `Voraussichtliche Lieferzeit: ${deliveryTime}`;
+
+            // Free shipping logic
+            if (itemCount > 75) {
+                resultElement.innerHTML = `
+                    <i class="fas fa-party-horn result-icon"></i>
+                    <div class="price-display">GRATIS!</div>
+                    <div class="delivery-time">Bei 75+ Artikeln versenden wir kostenfrei!</div>
+                `;
+            }
         }
+
+        // Initial setup
+        document.getElementById('result').style.display = 'none';
     </script>
 </body>
 </html>
